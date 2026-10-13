@@ -1,0 +1,76 @@
+:root {
+  --red: #f04444;
+  --red-hot: #ff3038;
+  --white: #f4f5f7;
+  --muted: #89909b;
+  --panel: rgba(9, 11, 15, .92);
+  --line: rgba(255,255,255,.11);
+}
+* { box-sizing: border-box; user-select: none; }
+html, body { margin: 0; width: 100%; min-height: 100%; background: transparent; color: var(--white); font-family: "Arial Narrow", "Roboto Condensed", Arial, sans-serif; }
+body { overflow: hidden; }
+.hud {
+  position: fixed; right: 2.1vw; bottom: 3.1vh; width: 310px;
+  padding: 14px 16px 11px; border: 1px solid rgba(255,255,255,.15);
+  border-top: 2px solid var(--red); border-radius: 5px;
+  background: linear-gradient(145deg, rgba(19,21,26,.96), var(--panel) 72%);
+  box-shadow: 0 12px 38px rgba(0,0,0,.32), inset 0 0 22px rgba(255,255,255,.018);
+  transform-origin: bottom right;
+}
+.topline, .speed-row, .rpm-head, .bottom-row, .footer-line { display: flex; align-items: center; justify-content: space-between; }
+.topline { padding-bottom: 11px; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 7px; font-size: 10px; font-weight: 900; letter-spacing: 2px; }
+.brand-mark { display: grid; place-items: center; width: 20px; height: 20px; background: var(--red); color: #fff; font-size: 14px; font-style: italic; clip-path: polygon(0 0,100% 0,78% 100%,0 100%); }
+.red { color: var(--red); }
+.status { display: flex; align-items: center; gap: 6px; font-size: 8px; letter-spacing: 1px; color: var(--muted); }
+.status i { width: 5px; height: 5px; border-radius: 50%; background: #656b75; }
+.status.on i { background: #68dc91; box-shadow: 0 0 8px #68dc91; }
+.speed-row { padding: 12px 0 8px; }
+.eyebrow { display: block; color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: 1.6px; }
+.speed-value { display: flex; align-items: baseline; gap: 7px; margin-top: 1px; }
+.speed-value span { font-size: 51px; line-height: .98; font-weight: 800; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
+.speed-value small { font-size: 9px; color: var(--red); font-weight: 800; letter-spacing: 1px; }
+.gear-block { width: 55px; height: 54px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(240,68,68,.55); background: rgba(240,68,68,.07); clip-path: polygon(10% 0,100% 0,100% 85%,90% 100%,0 100%,0 15%); }
+.gear-block strong { margin-top: 1px; font-size: 29px; line-height: 1; color: var(--red); font-weight: 800; }
+.rpm-area { padding: 6px 0 12px; }
+.rpm-head { margin-bottom: 6px; color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: 1.2px; }
+#rpmText { color: #e8e9ec; font-variant-numeric: tabular-nums; }
+.rpm-track { position: relative; height: 7px; overflow: hidden; background: #30333a; clip-path: polygon(0 0,100% 0,98% 100%,0 100%); }
+.rpm-fill { position: absolute; inset: 0 auto 0 0; width: 0; background: linear-gradient(90deg,#d5d7db 0%,#f0f1f3 68%,var(--red) 88%); transition: width .12s linear; }
+.redline-zone { position: absolute; top: 0; right: 0; height: 100%; width: 15%; background: repeating-linear-gradient(115deg,rgba(240,68,68,.9) 0 3px,transparent 3px 6px); opacity: .8; }
+.rpm-ticks { display: flex; justify-content: space-between; margin-top: 4px; color: #707681; font-size: 8px; }
+.bottom-row { min-height: 41px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.metric { display: flex; align-items: center; gap: 7px; flex: 1; }
+.metric-icon { display: grid; place-items: center; width: 21px; height: 21px; border: 1px solid #555b65; border-radius: 50%; color: #e4e6e9; font-size: 10px; font-weight: 800; }
+.metric-copy { display: flex; flex-direction: column; gap: 1px; }
+.metric-label { color: var(--muted); font-size: 8px; font-weight: 700; letter-spacing: 1px; }
+.metric-copy strong { font-size: 13px; font-variant-numeric: tabular-nums; }
+.metric-copy small { margin-left: 2px; color: var(--muted); font-size: 8px; }
+.mini-track { width: 37px; height: 3px; margin-left: auto; background: #363a42; }
+.mini-track i { display: block; width: 76%; height: 100%; background: var(--red); transition: width .2s; }
+.indicator-group { display: flex; align-items: center; gap: 10px; padding-left: 12px; border-left: 1px solid var(--line); }
+.indicator { color: #525964; font-size: 14px; transition: color .1s, text-shadow .1s; }
+.indicator.active { color: #7cff9d; text-shadow: 0 0 8px rgba(124,255,157,.7); }
+.seatbelt { padding: 4px 5px; border: 1px solid #4b515b; color: #7f8793; font-size: 7px; font-weight: 900; letter-spacing: .7px; border-radius: 2px; }
+.seatbelt.fastened { color: #7cff9d; border-color: rgba(124,255,157,.55); }
+.footer-line { padding-top: 9px; color: #6f7783; font-size: 7px; font-weight: 700; letter-spacing: 1.1px; }
+.live-tag { display: flex; align-items: center; gap: 5px; }
+.live-tag b { width: 4px; height: 4px; border-radius: 50%; background: var(--red); }
+.preview-panel { display: none; }
+body.preview-mode { background: radial-gradient(ellipse at 70% 90%, #242a32 0, #12151b 38%, #08090c 80%); min-height: 100vh; }
+body.preview-mode .preview-panel { display: block; position: fixed; top: 22px; left: 22px; width: min(350px, calc(100vw - 44px)); padding: 16px; color: #e8eaf0; background: rgba(13,15,20,.94); border: 1px solid #343943; border-radius: 7px; font: 12px Arial,sans-serif; box-shadow: 0 10px 30px #0005; }
+.preview-title { font-weight: 800; letter-spacing: 1px; margin-bottom: 14px; }
+.preview-title span { float: right; color: #8d95a3; font-weight: 400; letter-spacing: 0; }
+.preview-controls { display: grid; gap: 12px; }
+.preview-controls label { display: grid; grid-template-columns: 54px 1fr 64px; gap: 8px; align-items: center; color: #b9bfca; }
+.preview-controls input { width: 100%; accent-color: var(--red); }
+.preview-controls output { text-align: right; color: white; font-variant-numeric: tabular-nums; }
+.preview-controls select { grid-column: 2 / 4; background: #222630; color: white; border: 1px solid #444a55; padding: 5px; }
+.preview-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 15px; }
+.preview-buttons button { border: 1px solid #454b56; border-radius: 3px; background: #20242c; color: #f0f1f4; padding: 7px 8px; cursor: pointer; }
+.preview-buttons button:hover { border-color: var(--red); }
+.preview-panel p { color: #858d9a; line-height: 1.5; margin: 13px 0 0; font-size: 10px; }
+@media (max-width: 700px) {
+  .hud { right: 12px; bottom: 12px; transform: scale(.88); }
+  body.preview-mode .hud { right: 10px; bottom: 10px; transform: scale(.82); }
+}
